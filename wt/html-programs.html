@@ -1,0 +1,620 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Technologies Lab Programs</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 35px 15px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+        }
+
+        header h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: #101827;
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin: 5px 9px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #57e6ff;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 18px;
+        }
+
+        .program {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .program h2 {
+            color: #65eaff;
+            margin-bottom: 12px;
+        }
+
+        .program h3 {
+            color: #ffd166;
+            margin: 20px 0 8px;
+        }
+
+        .program p {
+            margin: 8px 0 12px;
+        }
+
+        pre {
+            background: #0b1020;
+            color: #d6e4ff;
+            border: 1px solid #34415e;
+            border-radius: 10px;
+            padding: 18px;
+            overflow-x: auto;
+            white-space: pre;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        code {
+            font-family: Consolas, monospace;
+        }
+
+        button {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 4px 0 12px;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        .output {
+            background: #fff;
+            color: #222;
+            border-radius: 10px;
+            padding: 18px;
+            margin-top: 12px;
+            overflow-x: auto;
+        }
+
+        .frames-output {
+            display: flex;
+            min-height: 170px;
+            overflow: hidden;
+            border: 2px solid #ddd;
+        }
+
+        .frame-a {
+            width: 25%;
+            background: skyblue;
+            color: #111;
+            padding: 10px;
+        }
+
+        .frame-b {
+            flex: 1;
+            background: red;
+            color: #111;
+            padding: 10px;
+        }
+
+        .frame-c {
+            width: 25%;
+            background: green;
+            color: white;
+            padding: 10px;
+        }
+
+        .output table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #222;
+        }
+
+        .output th,
+        .output td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .simple-table th {
+            background: #c6f6d5;
+        }
+
+        .complex-table th {
+            background: #ffe29a;
+        }
+
+        .link-demo a {
+            display: inline-block;
+            margin: 5px 12px 5px 0;
+            color: #005bea;
+        }
+
+        .form-demo {
+            max-width: 500px;
+        }
+
+        .form-demo label {
+            display: block;
+            margin-top: 12px;
+        }
+
+        .form-demo input:not([type="radio"]):not([type="checkbox"]),
+        .form-demo select,
+        .form-demo textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+        }
+
+        .form-demo input[type="radio"],
+        .form-demo input[type="checkbox"] {
+            width: auto;
+            margin: 8px 4px 8px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            background: #101827;
+            color: #ccd6e8;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 23px;
+            }
+
+            .program {
+                padding: 15px;
+            }
+
+            pre {
+                font-size: 12px;
+            }
+
+            nav a {
+                margin: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Web Technologies Lab Programs</h1>
+    <p>HTML and XHTML Experiments | Source Code | Copy Code | Sample Output</p>
+</header>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="#frames">Frames</a>
+    <a href="#simple-table">Simple Table</a>
+    <a href="#complex-table">Complex Table</a>
+    <a href="#links">Hyperlinks</a>
+    <a href="#registration">Registration</a>
+    <a href="#xhtml-links">XHTML Linking</a>
+    <a href="#xhtml-registration">XHTML Form</a>
+</nav>
+
+<main>
+
+    <!-- PROGRAM 1: FRAMES -->
+    <section class="program" id="frames">
+        <h2>Program 1: Frames</h2>
+        <p>Creating three frames with different background colors.</p>
+
+        <h3>1. frame_a.html</h3>
+        <pre id="frameACode"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;a_html page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body bgcolor="skyblue"&gt;
+    &lt;p&gt;Am a.html page&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <button onclick="copyCode('frameACode', this)">Copy Code</button>
+
+        <h3>2. frame_b.html</h3>
+        <pre id="frameBCode"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;b_html page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body bgcolor="red"&gt;
+    &lt;p&gt;Am b.html page&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <button onclick="copyCode('frameBCode', this)">Copy Code</button>
+
+        <h3>3. frame_c.html</h3>
+        <pre id="frameCCode"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;c_html page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body bgcolor="green"&gt;
+    &lt;p&gt;Am c.html page&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <button onclick="copyCode('frameCCode', this)">Copy Code</button>
+
+        <h3>4. HorizontalFrames.html</h3>
+        <pre id="horizontalFramesCode"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;frameset cols="25%,*,25%"&gt;
+    &lt;frame src="frame_a.html" /&gt;
+    &lt;frame src="frame_b.html" /&gt;
+    &lt;frame src="frame_c.html" /&gt;
+&lt;/frameset&gt;
+&lt;/html&gt;</code></pre>
+        <button onclick="copyCode('horizontalFramesCode', this)">Copy Code</button>
+
+        <h3>Sample Output</h3>
+        <div class="output">
+            <div class="frames-output">
+                <div class="frame-a"><p>Am a.html page</p></div>
+                <div class="frame-b"><p>Am b.html page</p></div>
+                <div class="frame-c"><p>Am c.html page</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRAM 2: SIMPLE TABLE -->
+    <section class="program" id="simple-table">
+        <h2>Program 2: Simple HTML Table</h2>
+        <p>Creating a table using table, tr, th, and td tags.</p>
+
+        <h3>Source Code</h3>
+        <pre id="simpleTableCode"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Simple Table&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;Student Details&lt;/h2&gt;
+    &lt;table border="1" cellpadding="10"&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Roll No&lt;/th&gt;
+            &lt;th&gt;Name&lt;/th&gt;
+            &lt;th&gt;Course&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;101&lt;/td&gt;
+            &lt;td&gt;Ravi&lt;/td&gt;
+            &lt;td&gt;MCA&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;102&lt;/td&gt;
+            &lt;td&gt;Kiran&lt;/td&gt;
+            &lt;td&gt;MCA&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <button onclick="copyCode('simpleTableCode', this)">Copy Code</button>
+
+        <h3>Sample Output</h3>
+        <div class="output">
+            <h3>Student Details</h3>
+            <table class="simple-table">
+                <tr><th>Roll No</th><th>Name</th><th>Course</th></tr>
+                <tr><td>101</td><td>Ravi</td><td>MCA</td></tr>
+                <tr><td>102</td><td>Kiran</td><td>MCA</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- PROGRAM 3: COMPLEX TABLE -->
+    <section class="program" id="complex-table">
+        <h2>Program 3: Table Using Rowspan and Colspan</h2>
+        <p>Using rowspan and colspan to merge table cells.</p>
+
+        <h3>Source Code</h3>
+        <pre id="complexTableCode"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Complex Table&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;Student Marks&lt;/h2&gt;
+    &lt;table border="1" cellpadding="10"&gt;
+        &lt;tr&gt;
+            &lt;th rowspan="2"&gt;Name&lt;/th&gt;
+            &lt;th colspan="2"&gt;Marks&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Computer&lt;/th&gt;
+            &lt;th&gt;Maths&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Ravi&lt;/td&gt;
+            &lt;td&gt;85&lt;/td&gt;
+            &lt;td&gt;90&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Kiran&lt;/td&gt;
+            &lt;td&gt;88&lt;/td&gt;
+            &lt;td&gt;82&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <button onclick="copyCode('complexTableCode', this)">Copy Code</button>
+
+        <h3>Sample Output</h3>
+        <div class="output">
+            <h3>Student Marks</h3>
+            <table class="complex-table">
+                <tr><th rowspan="2">Name</th><th colspan="2">Marks</th></tr>
+                <tr><th>Computer</th><th>Maths</th></tr>
+                <tr><td>Ravi</td><td>85</td><td>90</td></tr>
+                <tr><td>Kiran</td><td>88</td><td>82</td></tr>
+            </table>
+        </div>
+    </section>
+
+    
+    
+
+    <!-- PROGRAM 4: XHTML LINKING -->
+    <section class="program" id="xhtml-links">
+        <h2>Program 4: Internal and External Linking in XHTML</h2>
+        <p>Internal links navigate to sections on the same page. External links can open websites in a new tab.</p>
+
+        <h3>Source Code</h3>
+        <pre id="xhtmlLinksCode"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+    &lt;title&gt;XHTML Linking Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1 id="top"&gt;XHTML Linking Demonstration&lt;/h1&gt;
+
+    &lt;h2&gt;Internal Links&lt;/h2&gt;
+    &lt;p&gt;&lt;a href="#about"&gt;Go to About Section&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;a href="#contact"&gt;Go to Contact Section&lt;/a&gt;&lt;/p&gt;
+
+    &lt;h2&gt;External Links&lt;/h2&gt;
+    &lt;p&gt;&lt;a href="https://www.google.com" target="_blank"&gt;Open Google&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;a href="https://www.wikipedia.org" target="_blank"&gt;Open Wikipedia&lt;/a&gt;&lt;/p&gt;
+
+    &lt;h2 id="about"&gt;About Section&lt;/h2&gt;
+    &lt;p&gt;This is the About section.&lt;/p&gt;
+    &lt;p&gt;&lt;a href="#top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;
+
+    &lt;h2 id="contact"&gt;Contact Section&lt;/h2&gt;
+    &lt;p&gt;This is the Contact section.&lt;/p&gt;
+    &lt;p&gt;&lt;a href="#top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <button onclick="copyCode('xhtmlLinksCode', this)">Copy Code</button>
+
+        <h3>Sample Output</h3>
+        <div class="output link-demo">
+            <h2 id="demo-top">XHTML Linking Demonstration</h2>
+            <h3>Internal Links</h3>
+            <p><a href="#demo-about">Go to About Section</a></p>
+            <p><a href="#demo-contact">Go to Contact Section</a></p>
+
+            <h3>External Links</h3>
+            <p><a href="https://www.google.com" target="_blank" rel="noopener noreferrer">Open Google in a New Tab</a></p>
+            <p><a href="https://www.wikipedia.org" target="_blank" rel="noopener noreferrer">Open Wikipedia in a New Tab</a></p>
+
+            <h3 id="demo-about">About Section</h3>
+            <p>This is the About section.</p>
+            <p><a href="#demo-top">Back to Top</a></p>
+
+            <h3 id="demo-contact">Contact Section</h3>
+            <p>This is the Contact section.</p>
+            <p><a href="#demo-top">Back to Top</a></p>
+        </div>
+    </section>
+
+    <!-- PROGRAM 5: XHTML REGISTRATION FORM -->
+    <section class="program" id="xhtml-registration">
+        <h2>Program 5: Registration Form Using XHTML</h2>
+        <p>Demonstrates text fields, password, radio buttons, checkboxes, select, textarea, submit, and reset.</p>
+
+        <h3>Source Code</h3>
+        <pre id="xhtmlRegistrationCode"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+    &lt;title&gt;Student Registration Form&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Student Registration Form&lt;/h1&gt;
+
+    &lt;form action="#" method="post"&gt;
+        &lt;p&gt;
+            &lt;label for="xname"&gt;Full Name:&lt;/label&gt;
+            &lt;input type="text" id="xname" name="name" /&gt;
+        &lt;/p&gt;
+
+        &lt;p&gt;
+            &lt;label for="xemail"&gt;Email:&lt;/label&gt;
+            &lt;input type="text" id="xemail" name="email" /&gt;
+        &lt;/p&gt;
+
+        &lt;p&gt;
+            &lt;label for="xpassword"&gt;Password:&lt;/label&gt;
+            &lt;input type="password" id="xpassword" name="password" /&gt;
+        &lt;/p&gt;
+
+        &lt;p&gt;Gender:&lt;/p&gt;
+        &lt;p&gt;
+            &lt;input type="radio" id="xmale" name="gender" value="Male" /&gt;
+            &lt;label for="xmale"&gt;Male&lt;/label&gt;
+            &lt;input type="radio" id="xfemale" name="gender" value="Female" /&gt;
+            &lt;label for="xfemale"&gt;Female&lt;/label&gt;
+        &lt;/p&gt;
+
+        &lt;p&gt;Interests:&lt;/p&gt;
+        &lt;p&gt;
+            &lt;input type="checkbox" id="xcoding" name="interest" value="Coding" /&gt;
+            &lt;label for="xcoding"&gt;Coding&lt;/label&gt;
+            &lt;input type="checkbox" id="xsports" name="interest" value="Sports" /&gt;
+            &lt;label for="xsports"&gt;Sports&lt;/label&gt;
+        &lt;/p&gt;
+
+        &lt;p&gt;
+            &lt;label for="xcourse"&gt;Course:&lt;/label&gt;
+            &lt;select id="xcourse" name="course"&gt;
+                &lt;option value="MCA"&gt;MCA&lt;/option&gt;
+                &lt;option value="MBA"&gt;MBA&lt;/option&gt;
+                &lt;option value="MSc"&gt;M.Sc&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/p&gt;
+
+        &lt;p&gt;
+            &lt;label for="xaddress"&gt;Address:&lt;/label&gt;
+            &lt;textarea id="xaddress" name="address" rows="4" cols="30"&gt;&lt;/textarea&gt;
+        &lt;/p&gt;
+
+        &lt;p&gt;
+            &lt;input type="submit" value="Register" /&gt;
+            &lt;input type="reset" value="Clear" /&gt;
+        &lt;/p&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <button onclick="copyCode('xhtmlRegistrationCode', this)">Copy Code</button>
+
+        <h3>Sample Output</h3>
+        <div class="output">
+            <form class="form-demo" onsubmit="event.preventDefault(); alert('Demonstration only. No data was saved.');">
+                <label for="x-demo-name">Full Name:</label>
+                <input type="text" id="x-demo-name" required="required" />
+
+                <label for="x-demo-email">Email:</label>
+                <input type="email" id="x-demo-email" required="required" />
+
+                <label for="x-demo-password">Password:</label>
+                <input type="password" id="x-demo-password" required="required" />
+
+                <p>Gender:</p>
+                <input type="radio" id="x-demo-male" name="x-demo-gender" value="Male" />
+                <label for="x-demo-male">Male</label>
+                <input type="radio" id="x-demo-female" name="x-demo-gender" value="Female" />
+                <label for="x-demo-female">Female</label>
+
+                <p>Interests:</p>
+                <input type="checkbox" id="x-demo-coding" name="x-demo-interest" value="Coding" />
+                <label for="x-demo-coding">Coding</label>
+                <input type="checkbox" id="x-demo-sports" name="x-demo-interest" value="Sports" />
+                <label for="x-demo-sports">Sports</label>
+
+                <label for="x-demo-course">Course:</label>
+                <select id="x-demo-course">
+                    <option>MCA</option>
+                    <option>MBA</option>
+                    <option>M.Sc</option>
+                </select>
+
+                <label for="x-demo-address">Address:</label>
+                <textarea id="x-demo-address" rows="4"></textarea>
+
+                <br /><br />
+                <button type="submit">Register</button>
+                <button type="reset">Clear</button>
+            </form>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>Computer Science Lab | Web Technologies</p>
+</footer>
+
+<script>
+    async function copyCode(id, button) {
+        const codeElement = document.querySelector("#" + id + " code");
+        const code = codeElement.innerText;
+        const originalText = button.innerText;
+
+        try {
+            await navigator.clipboard.writeText(code);
+        } catch (error) {
+            const textarea = document.createElement("textarea");
+            textarea.value = code;
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            textarea.remove();
+        }
+
+        button.innerText = "Copied!";
+
+        setTimeout(() => {
+            button.innerText = originalText;
+        }, 1500);
+    }
+</script>
+
+</body>
+</html>
+```

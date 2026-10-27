@@ -1,0 +1,410 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DDA & Bresenham Line Drawing</title>
+
+    <link rel="stylesheet" href="cg-style.css">
+</head>
+
+<body>
+<div class="container">
+
+    <header>
+        <h1>📏 Line Drawing Algorithms</h1>
+        <p>Computer Graphics Lab — DDA and Bresenham Algorithms</p>
+    </header>
+
+    <nav>
+        <a href="../index.html">🏠 Home</a>
+        <a href="#dda">DDA Algorithm</a>
+        <a href="#bresenham">Bresenham Algorithm</a>
+        <a href="#java">Java Source Code</a>
+    </nav>
+
+    <section class="card">
+        <h2>🎯 Objective</h2>
+        <p>
+            To implement and understand the Digital Differential Analyzer
+            (DDA) and Bresenham line-drawing algorithms. Enter two endpoints
+            to see how each algorithm draws a line on the pixel grid.
+        </p>
+    </section>
+
+    <!-- DDA Algorithm -->
+    <section class="card" id="dda">
+        <h2>1. Digital Differential Analyzer (DDA)</h2>
+
+        <h3>Algorithm</h3>
+        <ol>
+            <li>Read the starting point (x1, y1) and ending point (x2, y2).</li>
+            <li>Calculate dx = x2 − x1 and dy = y2 − y1.</li>
+            <li>Calculate steps = max(|dx|, |dy|).</li>
+            <li>Calculate xIncrement = dx / steps and yIncrement = dy / steps.</li>
+            <li>Increment x and y at each step and plot the nearest pixel.</li>
+        </ol>
+
+        <h3>Enter Line Coordinates</h3>
+
+        <label for="ddaX1">X1:</label>
+        <input type="number" id="ddaX1" value="30">
+
+        <label for="ddaY1">Y1:</label>
+        <input type="number" id="ddaY1" value="40">
+
+        <label for="ddaX2">X2:</label>
+        <input type="number" id="ddaX2" value="220">
+
+        <label for="ddaY2">Y2:</label>
+        <input type="number" id="ddaY2" value="180">
+
+        <br>
+
+        <button onclick="drawDDA()">Draw DDA Line</button>
+        <button onclick="clearCanvas('ddaCanvas')">Clear</button>
+
+        <canvas id="ddaCanvas" width="600" height="300"></canvas>
+
+        <div class="output" id="ddaOutput">
+            Enter coordinates and click Draw DDA Line.
+        </div>
+    </section>
+
+    <!-- Bresenham Algorithm -->
+    <section class="card" id="bresenham">
+        <h2>2. Bresenham Line Drawing Algorithm</h2>
+
+        <h3>Algorithm</h3>
+        <ol>
+            <li>Read the two endpoints of the line.</li>
+            <li>Calculate dx = |x2 − x1| and dy = |y2 − y1|.</li>
+            <li>Determine the direction of movement along each axis.</li>
+            <li>Use an integer decision parameter to select the next pixel.</li>
+            <li>Continue until the endpoint is reached.</li>
+        </ol>
+
+        <h3>Enter Line Coordinates</h3>
+
+        <label for="bX1">X1:</label>
+        <input type="number" id="bX1" value="30">
+
+        <label for="bY1">Y1:</label>
+        <input type="number" id="bY1" value="40">
+
+        <label for="bX2">X2:</label>
+        <input type="number" id="bX2" value="220">
+
+        <label for="bY2">Y2:</label>
+        <input type="number" id="bY2" value="180">
+
+        <br>
+
+        <button onclick="drawBresenham()">Draw Bresenham Line</button>
+        <button onclick="clearCanvas('bresenhamCanvas')">Clear</button>
+
+        <canvas id="bresenhamCanvas" width="600" height="300"></canvas>
+
+        <div class="output" id="bresenhamOutput">
+            Enter coordinates and click Draw Bresenham Line.
+        </div>
+    </section>
+
+    <!-- Java Source Code -->
+    <section class="card" id="java">
+        <h2>💻 Java Source Code</h2>
+
+        <p>
+            The following Java program implements both algorithms using
+            Java Swing. Save the source code separately as
+            <strong>LineDrawing.java</strong>.
+        </p>
+
+        <button onclick="copyCode()">📋 Copy Java Code</button>
+
+        <pre id="javaCode">import javax.swing.*;
+import java.awt.*;
+
+public class LineDrawing extends JPanel {
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // DDA Line
+        g.setColor(Color.BLUE);
+        drawDDA(g, 50, 70, 250, 200);
+
+        // Bresenham Line
+        g.setColor(Color.RED);
+        drawBresenham(g, 300, 70, 500, 200);
+
+        g.setColor(Color.BLACK);
+        g.drawString("DDA Line", 100, 40);
+        g.drawString("Bresenham Line", 350, 40);
+    }
+
+    void drawDDA(Graphics g, int x1, int y1, int x2, int y2) {
+        int dx = x2 - x1;
+        int dy = y2 - y1;
+
+        int steps = Math.max(Math.abs(dx), Math.abs(dy));
+
+        if (steps == 0) {
+            g.fillRect(x1, y1, 2, 2);
+            return;
+        }
+
+        float xInc = (float) dx / steps;
+        float yInc = (float) dy / steps;
+
+        float x = x1;
+        float y = y1;
+
+        for (int i = 0; i <= steps; i++) {
+            g.fillRect(Math.round(x), Math.round(y), 2, 2);
+            x += xInc;
+            y += yInc;
+        }
+    }
+
+    void drawBresenham(Graphics g, int x1, int y1,
+                       int x2, int y2) {
+
+        int dx = Math.abs(x2 - x1);
+        int dy = Math.abs(y2 - y1);
+
+        int sx = x1 < x2 ? 1 : -1;
+        int sy = y1 < y2 ? 1 : -1;
+
+        int error = dx - dy;
+
+        while (true) {
+            g.fillRect(x1, y1, 3, 3);
+
+            if (x1 == x2 && y1 == y2) {
+                break;
+            }
+
+            int e2 = 2 * error;
+
+            if (e2 > -dy) {
+                error -= dy;
+                x1 += sx;
+            }
+
+            if (e2 < dx) {
+                error += dx;
+                y1 += sy;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Line Drawing Algorithms");
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 350);
+        frame.setLocationRelativeTo(null);
+        frame.add(new LineDrawing());
+        frame.setVisible(true);
+    }
+}</pre>
+    </section>
+
+    <div style="text-align:center; margin:25px 0;">
+        <a class="back-link" href="../index.html">← Back to Home</a>
+        <a class="back-link" href="circle-ellipse.html">
+            Next: Circle & Ellipse →
+        </a>
+    </div>
+
+    <footer>
+        <p>CG & Web Technologies Lab</p>
+        <p>DDA and Bresenham Line Drawing Algorithms</p>
+    </footer>
+
+</div>
+
+<script>
+    function getCoordinates(prefix) {
+        return {
+            x1: Number(document.getElementById(prefix + "X1").value),
+            y1: Number(document.getElementById(prefix + "Y1").value),
+            x2: Number(document.getElementById(prefix + "X2").value),
+            y2: Number(document.getElementById(prefix + "Y2").value)
+        };
+    }
+
+    function prepareCanvas(canvasId) {
+        const canvas = document.getElementById(canvasId);
+        const ctx = canvas.getContext("2d");
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw grid
+        ctx.strokeStyle = "#e5e7eb";
+        ctx.lineWidth = 1;
+
+        for (let x = 0; x <= canvas.width; x += 20) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, canvas.height);
+            ctx.stroke();
+        }
+
+        for (let y = 0; y <= canvas.height; y += 20) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.width, y);
+            ctx.stroke();
+        }
+
+        return ctx;
+    }
+
+    function validCoordinates(c) {
+        return Object.values(c).every(Number.isFinite) &&
+            c.x1 >= 0 && c.x1 < 600 &&
+            c.x2 >= 0 && c.x2 < 600 &&
+            c.y1 >= 0 && c.y1 < 300 &&
+            c.y2 >= 0 && c.y2 < 300;
+    }
+
+    function drawDDA() {
+        const c = getCoordinates("dda");
+        const output = document.getElementById("ddaOutput");
+
+        if (!validCoordinates(c)) {
+            output.textContent =
+                "Please enter coordinates within the canvas (X: 0–599, Y: 0–299).";
+            return;
+        }
+
+        const ctx = prepareCanvas("ddaCanvas");
+
+        const dx = c.x2 - c.x1;
+        const dy = c.y2 - c.y1;
+        const steps = Math.max(Math.abs(dx), Math.abs(dy));
+
+        const xInc = steps === 0 ? 0 : dx / steps;
+        const yInc = steps === 0 ? 0 : dy / steps;
+
+        let x = c.x1;
+        let y = c.y1;
+
+        ctx.fillStyle = "#7209b7";
+
+        for (let i = 0; i <= steps; i++) {
+            ctx.fillRect(Math.round(x) - 3, Math.round(y) - 3, 7, 7);
+            x += xInc;
+            y += yInc;
+        }
+
+        output.textContent =
+            `DDA completed. dx = ${dx}, dy = ${dy}, steps = ${steps}.`;
+    }
+
+    function drawBresenham() {
+        const c = getCoordinates("b");
+        const output = document.getElementById("bresenhamOutput");
+
+        if (!validCoordinates(c)) {
+            output.textContent =
+                "Please enter coordinates within the canvas (X: 0–599, Y: 0–299).";
+            return;
+        }
+
+        const ctx = prepareCanvas("bresenhamCanvas");
+
+        let x = c.x1;
+        let y = c.y1;
+
+        const dx = Math.abs(c.x2 - c.x1);
+        const dy = Math.abs(c.y2 - c.y1);
+
+        const sx = c.x1 < c.x2 ? 1 : -1;
+        const sy = c.y1 < c.y2 ? 1 : -1;
+
+        let error = dx - dy;
+
+        ctx.fillStyle = "#f72585";
+
+        while (true) {
+            ctx.fillRect(x - 3, y - 3, 7, 7);
+
+            if (x === c.x2 && y === c.y2) {
+                break;
+            }
+
+            const e2 = 2 * error;
+
+            if (e2 > -dy) {
+                error -= dy;
+                x += sx;
+            }
+
+            if (e2 < dx) {
+                error += dx;
+                y += sy;
+            }
+        }
+
+        output.textContent =
+            `Bresenham completed. dx = ${dx}, dy = ${dy}.`;
+    }
+
+    function clearCanvas(canvasId) {
+        const canvas = document.getElementById(canvasId);
+        const ctx = canvas.getContext("2d");
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const outputId = canvasId === "ddaCanvas"
+            ? "ddaOutput"
+            : "bresenhamOutput";
+
+        document.getElementById(outputId).textContent =
+            "Canvas cleared. Enter coordinates and draw again.";
+    }
+
+    function copyCode() {
+        const code = document.getElementById("javaCode").textContent;
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(code)
+                .then(() => alert("Java code copied!"))
+                .catch(() => fallbackCopy(code));
+        } else {
+            fallbackCopy(code);
+        }
+    }
+
+    function fallbackCopy(code) {
+        const textarea = document.createElement("textarea");
+        textarea.value = code;
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            document.execCommand("copy");
+            alert("Java code copied!");
+        } catch {
+            alert("Copy failed. Please select and copy the code manually.");
+        }
+
+        textarea.remove();
+    }
+
+    drawDDA();
+    drawBresenham();
+</script>
+
+</body>
+</html>
