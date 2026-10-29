@@ -1,10 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>CG & Web Technologies Lab</title>
 
     <style>
@@ -19,25 +17,14 @@
             font-family: Arial, Helvetica, sans-serif;
             color: white;
             min-height: 100vh;
-            background: linear-gradient(
-                135deg,
-                #10002b,
-                #3c096c,
-                #4361ee,
-                #00b4d8
-            );
+            background: linear-gradient(135deg, #10002b, #3c096c, #4361ee, #00b4d8);
             background-attachment: fixed;
         }
 
         header {
             text-align: center;
             padding: 65px 20px;
-            background: linear-gradient(
-                120deg,
-                #7209b7,
-                #f72585,
-                #4361ee
-            );
+            background: linear-gradient(120deg, #7209b7, #f72585, #4361ee);
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
         }
 
@@ -114,10 +101,7 @@
 
         .cards {
             display: grid;
-            grid-template-columns: repeat(
-                auto-fit,
-                minmax(230px, 1fr)
-            );
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
             gap: 22px;
             margin-top: 25px;
         }
@@ -140,12 +124,7 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(
-                90deg,
-                #f72585,
-                #ffd166,
-                #00f5d4
-            );
+            background: linear-gradient(90deg, #f72585, #ffd166, #00f5d4);
         }
 
         .card:hover {
@@ -192,20 +171,12 @@
             background: linear-gradient(90deg, #00f5d4, #4361ee);
         }
 
+        #cg .card:nth-child(3)::before {
+            background: linear-gradient(90deg, #8338ec, #00f5d4);
+        }
+
         #wt .card:nth-child(1)::before {
             background: linear-gradient(90deg, #ff006e, #8338ec);
-        }
-
-        #wt .card:nth-child(2)::before {
-            background: linear-gradient(90deg, #00b4d8, #80ffdb);
-        }
-
-        #wt .card:nth-child(3)::before {
-            background: linear-gradient(90deg, #ffd166, #f72585);
-        }
-
-        #wt .card:nth-child(4)::before {
-            background: linear-gradient(90deg, #06d6a0, #4361ee);
         }
 
         footer {
@@ -260,7 +231,6 @@
 </head>
 
 <body>
-
     <header id="home">
         <h1>🎓 CG & Web Technologies Lab</h1>
         <p>Computer Graphics and Web Technologies Programs</p>
@@ -274,11 +244,8 @@
     </nav>
 
     <main>
-
-        <!-- Home Section -->
         <section class="section" id="welcome">
             <h2>👋 Welcome to Our Lab</h2>
-
             <p>
                 This website contains practical programs for Computer
                 Graphics and Web Technologies. Select a program below
@@ -289,72 +256,60 @@
         <!-- Computer Graphics Section -->
         <section class="section" id="cg">
             <h2>🎨 Computer Graphics Programs</h2>
-
             <p class="section-intro">
                 Explore line-drawing algorithms and geometric drawing
                 techniques with Java programs and sample outputs.
             </p>
 
             <div class="cards">
-
                 <div class="card">
-                    <h3>📏 DDA & Bresenham Line Drawing</h3>
-
+                    <h3>📏 DDA Line Drawing</h3>
                     <p>
-                        Learn and compare the DDA and Bresenham
-                        line-drawing algorithms with Java Swing output.
+                        Learn the Digital Differential Analyzer algorithm
+                        for drawing a straight line using incremental steps.
                     </p>
-
-                    <a href="cg/line-drawing.html">
-                        View Program →
-                    </a>
+                    <a href="cg/dda.html">View Program →</a>
                 </div>
 
                 <div class="card">
-                    <h3>⭕ Midpoint Circle & Ellipse</h3>
-
+                    <h3>📐 Bresenham Line Drawing</h3>
                     <p>
-                        Study both the Midpoint Circle and Midpoint
-                        Ellipse algorithms together, including source
-                        code and graphical sample outputs.
+                        Study Bresenham's efficient integer-based algorithm
+                        for drawing straight lines on a pixel grid.
                     </p>
-
-                    <a href="cg/circle-ellipse.html">
-                        View Program →
-                    </a>
+                    <a href="cg/bresenham.html">View Program →</a>
                 </div>
 
+                <div class="card">
+                    <h3>⭕ Midpoint Circle Drawing</h3>
+                    <p>
+                        Learn how to draw a circle using the midpoint
+                        decision parameter and eight-way symmetry.
+                    </p>
+                    <a href="cg/midpoint-circle.html">View Program →</a>
+                </div>
             </div>
         </section>
 
         <!-- Web Technologies Section -->
         <section class="section" id="wt">
             <h2>💻 Web Technologies Programs</h2>
-
             <p class="section-intro">
-                Practice HTML frames, tables, hyperlinks, and form
-                elements with examples.
+                Practice HTML frames, tables, hyperlinks, and registration
+                forms with examples and source code.
             </p>
 
             <div class="cards">
-
                 <div class="card">
-                    <h3>🖼️ HTML programs</h3>
-
+                    <h3>🌐 HTML Programs</h3>
                     <p>
-                        Learn how to organize web content into
-                        multiple sections using embedded frames.
+                        Explore frames, simple and complex tables,
+                        hyperlinks, and registration forms in one place.
                     </p>
-
-                    <a href="wt/html-programs.html">
-                        View Program →
-                    </a>
+                    <a href="wt/html-programs.html">View Programs →</a>
                 </div>
-
-
             </div>
         </section>
-
     </main>
 
     <footer>
@@ -362,6 +317,5 @@
         <p>Computer Graphics • HTML • CSS • JavaScript</p>
         <p>Designed for practical learning and experimentation.</p>
     </footer>
-
 </body>
 </html>

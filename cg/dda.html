@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DDA Line Drawing | CG Lab</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    min-height: 100vh;
+    background: linear-gradient(
+        135deg, #10002b, #3c096c, #4361ee, #00b4d8
+    );
+    background-attachment: fixed;
+}
+
+header {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(120deg, #7209b7, #f72585, #4361ee);
+    box-shadow: 0 5px 25px rgba(0,0,0,.3);
+}
+
+header h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    margin-bottom: 12px;
+}
+
+header p {
+    line-height: 1.7;
+    margin-top: 5px;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(16,0,43,.95);
+    backdrop-filter: blur(12px);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 11px 17px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: .3s;
+}
+
+nav a:hover {
+    background: linear-gradient(90deg,#f72585,#7209b7);
+}
+
+main {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+.section {
+    margin-bottom: 28px;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 22px;
+    background: rgba(255,255,255,.10);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+h2 {
+    font-size: 27px;
+    margin-bottom: 18px;
+    color: #ffd166;
+}
+
+p, li {
+    line-height: 1.8;
+}
+
+.inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+    gap: 15px;
+    margin: 22px 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ffffff55;
+    border-radius: 9px;
+    font-size: 16px;
+}
+
+button {
+    padding: 12px 18px;
+    margin: 8px 8px 8px 0;
+    border: none;
+    border-radius: 9px;
+    background: linear-gradient(90deg,#ffd166,#fca311);
+    color: #10002b;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+button:hover {
+    background: linear-gradient(90deg,#00f5d4,#80ffdb);
+    transform: translateY(-2px);
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    margin: 22px auto;
+    background: white;
+    border-radius: 12px;
+}
+
+pre {
+    background: #10002b;
+    color: #d6e4ff;
+    padding: 22px;
+    margin-top: 18px;
+    border-radius: 14px;
+    border: 1px solid #ffffff33;
+    overflow-x: auto;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+#message, #copyMessage {
+    margin-top: 12px;
+    font-weight: bold;
+    color: #ffd166;
+}
+
+footer {
+    text-align: center;
+    padding: 28px 15px;
+    background: rgba(16,0,43,.9);
+    line-height: 1.8;
+}
+
+footer strong {
+    color: #ffd166;
+}
+
+.note {
+    color: #f1f1ff;
+    font-size: 14px;
+}
+
+@media(max-width:600px) {
+    header { padding: 35px 15px; }
+    nav { gap: 5px; padding: 10px; }
+    nav a { padding: 9px 11px; font-size: 13px; }
+    main { padding: 18px 12px; }
+    .section { padding: 22px 16px; }
+    h2 { font-size: 23px; }
+    .inputs { grid-template-columns: 1fr 1fr; }
+    pre { font-size: 12px; padding: 14px; }
+}
+</style>
+</head>
+
+<body>
+
+<header id="home">
+    <h1>📏 DDA Line Drawing Algorithm</h1>
+    <p>Computer Graphics Lab Program</p>
+    <p>Learn • Practice • Explore</p>
+</header>
+
+<nav>
+    <a href="../index.html">🏠 Home</a>
+    <a href="dda.html">📏 DDA</a>
+    <a href="bresenham.html">📐 Bresenham</a>
+    <a href="midpoint-circle.html">⭕ Midpoint Circle</a>
+</nav>
+
+<main>
+
+<section class="section">
+    <h2>✏️ Enter Coordinates</h2>
+
+    <div class="inputs">
+        <div>
+            <label for="x1">Starting X (x1)</label>
+            <input type="number" id="x1" value="50">
+        </div>
+        <div>
+            <label for="y1">Starting Y (y1)</label>
+            <input type="number" id="y1" value="50">
+        </div>
+        <div>
+            <label for="x2">Ending X (x2)</label>
+            <input type="number" id="x2" value="500">
+        </div>
+        <div>
+            <label for="y2">Ending Y (y2)</label>
+            <input type="number" id="y2" value="240">
+        </div>
+    </div>
+
+    <button onclick="drawLine()">Draw Line</button>
+    <button onclick="resetValues()">Reset</button>
+
+    <p id="message" role="status"></p>
+    <canvas id="canvas" width="600" height="300"></canvas>
+    <p class="note">X must be between 0–600 and Y between 0–300.</p>
+</section>
+
+<section class="section">
+    <h2>📘 Algorithm</h2>
+    <ol>
+        <li>Enter the starting and ending coordinates.</li>
+        <li>Calculate dx = x2 − x1 and dy = y2 − y1.</li>
+        <li>Calculate steps = max(|dx|, |dy|).</li>
+        <li>Calculate x and y increments.</li>
+        <li>Plot rounded coordinates for each step.</li>
+    </ol>
+</section>
+
+<section class="section">
+    <h2>💻 Java Source Code</h2>
+
+<pre><code id="javaCode">import java.awt.*;
+import javax.swing.*;
+
+public class DDA_Line extends JPanel {
+    int x1, y1, x2, y2;
+
+    DDA_Line(int x1, int y1, int x2, int y2) {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        int dx = x2 - x1;
+        int dy = y2 - y1;
+        int steps = Math.max(Math.abs(dx), Math.abs(dy));
+
+        float xi = steps == 0 ? 0 : (float) dx / steps;
+        float yi = steps == 0 ? 0 : (float) dy / steps;
+
+        float x = x1;
+        float y = y1;
+
+        g.setColor(Color.BLUE);
+
+        for (int i = 0; i &lt;= steps; i++) {
+            g.fillRect(Math.round(x), Math.round(y), 3, 3);
+            x += xi;
+            y += yi;
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            int x1 = Integer.parseInt(
+                JOptionPane.showInputDialog("Enter X1"));
+            int y1 = Integer.parseInt(
+                JOptionPane.showInputDialog("Enter Y1"));
+            int x2 = Integer.parseInt(
+                JOptionPane.showInputDialog("Enter X2"));
+            int y2 = Integer.parseInt(
+                JOptionPane.showInputDialog("Enter Y2"));
+
+            JFrame f = new JFrame("DDA Line Drawing");
+            f.add(new DDA_Line(x1, y1, x2, y2));
+            f.setSize(650, 400);
+            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            f.setVisible(true);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                null, "Enter valid integer coordinates.");
+        }
+    }
+}</code></pre>
+
+    <button onclick="copyJavaCode()">📋 Copy Java Code</button>
+    <p id="copyMessage" role="status"></p>
+</section>
+
+</main>
+
+<footer>
+    <p><strong>CG &amp; Web Technologies Lab</strong></p>
+    <p>Computer Graphics • HTML • CSS • JavaScript</p>
+    <p>Designed for practical learning and experimentation.</p>
+</footer>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+function drawLine() {
+    const ids = ["x1", "y1", "x2", "y2"];
+    const fields = ids.map(id => document.getElementById(id));
+
+    if (fields.some(field => field.value.trim() === "")) {
+        document.getElementById("message").textContent =
+            "Please enter all four coordinates.";
+        return;
+    }
+
+    const values = fields.map(field => Number(field.value));
+    let [x1, y1, x2, y2] = values;
+
+    if (x1 < 0 || x1 > 600 || x2 < 0 || x2 > 600 ||
+        y1 < 0 || y1 > 300 || y2 < 0 || y2 > 300) {
+        document.getElementById("message").textContent =
+            "X must be 0–600 and Y must be 0–300.";
+        return;
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    const steps = Math.max(Math.abs(dx), Math.abs(dy));
+
+    const xi = steps === 0 ? 0 : dx / steps;
+    const yi = steps === 0 ? 0 : dy / steps;
+
+    let x = x1;
+    let y = y1;
+
+    ctx.fillStyle = "#4361ee";
+
+    for (let i = 0; i <= steps; i++) {
+        ctx.fillRect(Math.round(x), Math.round(y), 3, 3);
+        x += xi;
+        y += yi;
+    }
+
+    document.getElementById("message").textContent =
+        `Line drawn from (${values[0]}, ${values[1]}) to (${values[2]}, ${values[3]}).`;
+}
+
+function resetValues() {
+    document.getElementById("x1").value = 50;
+    document.getElementById("y1").value = 50;
+    document.getElementById("x2").value = 500;
+    document.getElementById("y2").value = 240;
+    document.getElementById("message").textContent = "";
+    drawLine();
+}
+
+function copyJavaCode() {
+    const code = document.getElementById("javaCode").innerText;
+    const message = document.getElementById("copyMessage");
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(code)
+            .then(() => message.textContent = "✅ Java code copied!")
+            .catch(() => fallbackCopy(code));
+    } else {
+        fallbackCopy(code);
+    }
+}
+
+function fallbackCopy(code) {
+    const textarea = document.createElement("textarea");
+    textarea.value = code;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    try {
+        document.execCommand("copy");
+        document.getElementById("copyMessage").textContent =
+            "✅ Java code copied!";
+    } catch (error) {
+        document.getElementById("copyMessage").textContent =
+            "Please select and copy the code manually.";
+    }
+
+    textarea.remove();
+}
+
+drawLine();
+</script>
+
+</body>
+</html>
